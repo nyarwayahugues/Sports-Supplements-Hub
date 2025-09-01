@@ -1,0 +1,18 @@
+<div class="row">
+  <div class="col-md-6">
+    {% if product['image'] %}
+      <img src="{{ url_for('static', filename='images/'~product['image']) }}" alt="{{ product['name'] }}" class="img-fluid">
+    {% else %}
+      <img src="{{ url_for('static', filename='images/placeholder.png') }}" alt="{{ product['name'] }}" class="img-fluid">
+    {% endif %}
+  </div>
+  <div class="col-md-6">
+    <h4>{{ product['name'] }}</h4>
+    <p class="text-muted">{{ product['description'] }}</p>
+    <p class="fw-bold text-success">${{ '%.2f'|format(product['price']) }}</p>
+    <p>Category: <span class="badge bg-light text-dark">{{ product['category'] }}</span></p>
+    <a class="btn btn-success whatsapp-link" target="_blank" href="https://wa.me/{{ whatsapp_number }}?text={{ ('I%20am%20interested%20in%20' ~ product['name']) | urlencode }}">
+      <i class="bi bi-whatsapp"></i> Order on WhatsApp
+    </a>
+  </div>
+</div>
