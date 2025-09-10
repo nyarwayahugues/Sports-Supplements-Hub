@@ -1,43 +1,55 @@
 {% extends "layout.html" %}
 
+{% block head_extra %}
+  <!-- Include AOS CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+{% endblock %}
+
 {% block hero_extra %}
-  <div class="d-flex justify-content-start flex-wrap gap-2">
-    <div class="btn-group flex-wrap">
+  <div class="d-flex justify-content-start flex-wrap gap-2 mb-4" data-aos="fade-down" data-aos-duration="800">
+    <div class="btn-group flex-wrap category-buttons">
       <a href="{{ url_for('home') }}"
          class="btn btn-outline-light {% if not category %}active text-dark bg-white border-0{% endif %}">
-        All
+        <i class="bi bi-grid-fill me-1"></i> All
       </a>
       <a href="{{ url_for('home', category='Creatine') }}"
          class="btn btn-outline-light {% if category == 'Creatine' %}active text-dark bg-white border-0{% endif %}">
-        Creatine
+        <i class="bi bi-lightning-fill me-1"></i> Creatine
       </a>
       <a href="{{ url_for('home', category='Whey') }}"
          class="btn btn-outline-light {% if category == 'Whey' %}active text-dark bg-white border-0{% endif %}">
-        Whey
+        <i class="bi bi-basket-fill me-1"></i> Whey
       </a>
       <a href="{{ url_for('home', category='Pre-Workout') }}"
          class="btn btn-outline-light {% if category == 'Pre-Workout' %}active text-dark bg-white border-0{% endif %}">
-        Pre-Workout
+        <i class="bi bi-fire me-1"></i> Pre-Workout
       </a>
       <a href="{{ url_for('home', category='Vitamins') }}"
          class="btn btn-outline-light {% if category == 'Vitamins' %}active text-dark bg-white border-0{% endif %}">
-        Vitamins
+        <i class="bi bi-droplet-fill me-1"></i> Vitamins
       </a>
     </div>
   </div>
 {% endblock %}
 
 {% block content %}
-  <h2 id="products" class="mb-4">Supplements</h2>
+  <!-- Products Section -->
+  <h2 id="products" class="mb-4 section-header" data-aos="fade-up" data-aos-duration="800">Supplements</h2>
+  
   <div class="row g-4">
     {% if products %}
       {% for product in products %}
-        <div class="col-md-4 col-lg-3">
-          <div class="card h-100 product-card shadow-sm">
+        <div class="col-md-4 col-lg-3"
+             data-aos="fade-up"
+             data-aos-duration="800"
+             data-aos-delay="{{ loop.index0 * 100 }}">
+          <div class="card h-100 product-card shadow-sm hover-scale">
             <img src="{{ url_for('static', filename='images/' ~ product.image) }}" class="card-img-top" alt="{{ product.name }}">
             <div class="card-body d-flex flex-column">
               <h5 class="card-title">{{ product.name }}</h5>
-              <p class="card-text text-success fw-bold">${{ product.price }}</p>
+              <p class="card-text text-success fw-bold">
+                RWF {{ "{:,}".format(product.price) }}
+              </p>
               <a href="https://wa.me/{{ whatsapp_number }}?text=I%20want%20to%20order%20{{ product.name }}"
                  class="btn btn-success mt-auto">
                 <i class="bi bi-whatsapp"></i> Order
@@ -47,11 +59,225 @@
         </div>
       {% endfor %}
     {% else %}
-      <div class="col-12">
-        <div class="alert alert-warning text-center">
-          No products found. Try selecting a different category or search term.
+      <div class="col-12 mt-3">
+        <div class="alert alert-warning text-center" style="margin-top: 1rem;">
+          No products found. Try selecting a different category.
         </div>
       </div>
     {% endif %}
   </div>
+
+  <!-- WHY CHOOSE US SECTION -->
+  <section class="py-5 mt-5" style="background: linear-gradient(135deg, #e9f7ef, #f7f9fb);">
+    <div class="container">
+      <h2 class="text-center mb-5 section-header" data-aos="fade-up" data-aos-duration="800">WHY CHOOSE US?</h2>
+      <div class="row g-4 text-center justify-content-center">
+
+        <!-- AUTHENTICITY -->
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="100" data-aos-duration="800">
+          <div class="why-us-card p-4 shadow-lg rounded hover-scale">
+            <i class="bi bi-patch-check-fill display-4 text-success mb-3"></i>
+            <h5 class="fw-bold">100% AUTHENTIC</h5>
+            <p>We provide high-quality products directly from top brands, designed to enhance your performance and support your health.</p>
+          </div>
+        </div>
+
+        <!-- PRICING -->
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="200" data-aos-duration="800">
+          <div class="why-us-card p-4 shadow-lg rounded hover-scale">
+            <i class="bi bi-tag-fill display-4 text-success mb-3"></i>
+            <h5 class="fw-bold">PRICING</h5>
+            <p>We’re committed to offering unbeatable prices, making it easier for you to meet your health goals. We only work with quality brands.</p>
+          </div>
+        </div>
+
+        <!-- CUSTOMER SERVICE -->
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="300" data-aos-duration="800">
+          <div class="why-us-card p-4 shadow-lg rounded hover-scale">
+            <i class="bi bi-person-lines-fill display-4 text-success mb-3"></i>
+            <h5 class="fw-bold">CUSTOMER SERVICE</h5>
+            <p>We’ve thoroughly researched our products to help you choose the right ones for your goals. Contact on WhatsApp for support at +86 15677099760.</p>
+          </div>
+        </div>
+
+        <!-- SECURED PAYMENT -->
+        <div class="col-sm-6 col-lg-3" data-aos="fade-up" data-aos-delay="400" data-aos-duration="800">
+          <div class="why-us-card p-4 shadow-lg rounded hover-scale">
+            <i class="bi bi-shield-lock-fill display-4 text-success mb-3"></i>
+            <h5 class="fw-bold">SECURED PAYMENT</h5>
+            <p>Your payment info is processed securely. We accept cash, bank transfer, and Mobile Money Transfers.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contact For More Button -->
+      <div class="text-center mt-5" data-aos="zoom-in" data-aos-duration="800">
+        <a id="contact-button"
+           href="https://wa.me/{{ whatsapp_number }}?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20products"
+           class="btn btn-lg btn-success px-5 shadow-lg hover-scale">
+          <i class="bi bi-whatsapp"></i> Contact For More
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ SECTION -->
+  <section id="faq" class="py-5">
+    <div class="container">
+      <h2 class="text-center mb-5 section-header" data-aos="fade-up">FAQs</h2>
+      <div class="accordion shadow-sm" id="faqAccordion" data-aos="fade-up" data-aos-duration="800">
+
+        <!-- Question 1 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq1">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1">
+              <i class="bi bi-patch-check-fill me-2 text-success"></i> Are your supplements authentic?
+            </button>
+          </h2>
+          <div id="collapse1" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, all our supplements are 100% authentic and sourced directly from trusted brands.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse2">
+              <i class="bi bi-truck me-2 text-success"></i> Do you offer delivery services?
+            </button>
+          </h2>
+          <div id="collapse2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Yes, we provide fast and reliable delivery across Rwanda.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse3">
+              <i class="bi bi-credit-card-2-front me-2 text-success"></i> What payment methods do you accept?
+            </button>
+          </h2>
+          <div id="collapse3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              We accept mobile money, cash on delivery.
+            </div>
+          </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq4">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse4">
+              <i class="bi bi-chat-left-text me-2 text-success"></i> Can I get advice on what supplement suits me?
+            </button>
+          </h2>
+          <div id="collapse4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Absolutely! Our team will help guide you based on your fitness and health goals. Just contact us on WhatsApp for personalized support.
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Custom CSS -->
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Hover scale effect */
+    .hover-scale {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .hover-scale:hover {
+      transform: translateY(-5px) scale(1.03);
+      box-shadow: 0 1rem 1.5rem rgba(0, 0, 0, 0.15);
+    }
+
+    /* Why Us cards */
+    .why-us-card {
+      background: #fff;
+      border-left: 5px solid #198754;
+      height: 100%;
+    }
+    .why-us-card i {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .why-us-card:hover i {
+      transform: scale(1.25);
+      color: #145c32;
+    }
+
+    /* Category buttons */
+    .category-buttons a {
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .category-buttons a i {
+      transition: transform 0.3s ease, color 0.3s ease;
+    }
+    .category-buttons a:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
+    }
+    .category-buttons a:hover i {
+      transform: translateY(-2px) scale(1.2);
+      color: #198754;
+    }
+
+    /* Section headers */
+    .section-header {
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    /* Hero section adjustments */
+    .hero {
+      min-height: 50vh;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero .col-md-7 {
+      max-width: 60%;
+    }
+    .hero .col-md-5 img {
+      position: absolute;
+      right: 0;
+      top: 0;
+      height: 100%;
+      width: auto;
+      object-fit: cover;
+    }
+    @media (max-width: 767.98px) {
+      .hero {
+        min-height: 40vh;
+      }
+      .hero .col-md-7 {
+        max-width: 100%;
+      }
+      .hero .col-md-5 img {
+        position: relative;
+        width: 100%;
+        height: auto;
+      }
+    }
+  </style>
+
+  <!-- AOS JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+  <script>
+    AOS.init({
+      duration: 800,
+      once: true,
+      startEvent: 'DOMContentLoaded'
+    });
+  </script>
+
 {% endblock %}

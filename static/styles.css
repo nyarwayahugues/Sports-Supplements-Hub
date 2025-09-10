@@ -8,14 +8,21 @@ body {
 /* Navbar */
 .navbar-brand {
   font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-brand img {
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 /* Hero */
 .hero {
   position: relative;
-  background: url('..static/images/hero-right.png') center/cover no-repeat;
+  background: url('../images/hero-right.png') center/cover no-repeat;
   color: white;
-  padding: 2.2rem 0;
+  padding: 1.5rem 0;
 }
 
 .hero .overlay {
@@ -52,13 +59,17 @@ body {
 }
 
 /* Category buttons */
-.btn-group .btn {
-  border-radius: 20px !important;
-  padding: 0.4rem 1rem;
+.hero .btn-outline-light {
+  border-radius: 25px;
+  padding: 0.45rem 1.2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
 }
 
-.btn-group .btn.active {
-  font-weight: 600;
+.hero .btn-outline-light:hover {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: #fff;
 }
 
 /* Products */
