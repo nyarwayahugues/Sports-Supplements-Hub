@@ -74,8 +74,11 @@ body {
 
 /* Products */
 .product-card img {
-  height: 200px;
-  object-fit: cover;
+  height: 250px;
+  object-fit: contain;
+  width: 100%;
+  background-color: #fff;
+  padding: 10px;
   border-top-left-radius: 0.5rem;
   border-top-right-radius: 0.5rem;
 }
