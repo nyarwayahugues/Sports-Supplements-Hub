@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<section class="py-5">
+  <div class="container">
+    <h2 class="text-center fw-bold mb-4">{{ category }} Collection</h2>
+    {% if products %}
+    <div class="row g-4">
+      {% for product in products %}
+      <div class="col-md-3 col-sm-6">
+        <div class="card h-100 shadow-sm">
+          <img src="{{ url_for('static', filename='images/' ~ product.image) }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+          <div class="card-body text-center">
+            <h5 class="card-title">{{ product.name }}</h5>
+            <p class="card-text">${{ product.price }}</p>
+            <a href="https://wa.me/{{ whatsapp_number }}?text=I'm interested in {{ product.name }}" 
+               class="btn btn-success">Order on WhatsApp</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="text-center">No products found in this category.</p>
+    {% endif %}
+  </div>
+</section>
+
+{% endblock %}
