@@ -92,3 +92,8 @@ body {
   color: #f8f9fa;
   font-weight: 600;
 }
+.card-body p.card-text {
+    color: #555555;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}

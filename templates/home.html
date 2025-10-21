@@ -52,6 +52,7 @@
               <p class="card-text text-success fw-bold">
                 RWF {{ "{:,}".format(product.price) }}
               </p>
+              
               <a href="https://wa.me/{{ whatsapp_number }}?text=I%20want%20to%20order%20{{ product.name }}"
                  class="btn btn-success mt-auto">
                 <i class="bi bi-whatsapp"></i> Order
@@ -63,7 +64,7 @@
     {% else %}
       <div class="col-12 mt-3">
         <div class="alert alert-warning text-center" style="margin-top: 1rem;">
-          No products found. Try selecting a different category.
+          Choose Among the Above Different Categories.
         </div>
       </div>
     {% endif %}
